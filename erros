@@ -4,14 +4,24 @@ Todos os erros detectados foram na API que depois deverão ser reportados como i
 
 Proposição não encontrada:
  - Todas as proposições que são do tipo "REQ" apresentaram esse erro. Como se não estivesse cadastrado na base de dados, retornando apenas vazio.
+ - REC,49,2015
+ - PLN,5,2015
 
 Erro 500:
- -  Algumas proposições apresentaram esse erro ao tentar pegar as votações relacionadas à ela utilizando a função `fetch_votacoes`.
+ -  Algumas proposições apresentaram esse erro ao tentar pegar as votações relacionadas à ela utilizando a função `fetch_votacoes`. Os ids das proposições que retornam o erro:
+ - 1050788 (PLP,37,2015)
+ - 1228455 (PDC,57,2015)
+ - 148200 (PEC,215,2003)
+ - 344866 (PLP,25,2007) (error on line 1 at column 23961: Extra content at the end of the document)
+ - 373327 (PEC,182,2007) (error on line 1 at column 23961: Extra content at the end of the document)
+ - 526536 (PLP,106,2011)
+ - 578047 (PLP,278,2013)
+ - 994612 (PLP,25,2015)
 
 Erro 404:
  - As seguintes proposições retornaram esse erro ao pegar a última votação associada à elas. Apesar destas existirem, ao tentar acessar usando `fetch_votacao`, o erro é gerado.
-	pl4474,2004
-	pec172,2012
+	PL,4474,2004
+	PEC,172,2012
 	PEC,197,2012
 	PL,4246,2012
 	PEC,209,2012
