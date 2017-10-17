@@ -4,6 +4,8 @@ library(readr)
 library(purrr)
 library(rcongresso)
 
+source("constroi_dataframe.R")
+
 args = commandArgs(trailingOnly = TRUE)
 if (length(args) != 1) {
   stop(
@@ -13,16 +15,20 @@ if (length(args) != 1) {
 
 arquivo_proposicoes <- args[1]
 
-arquivo_proposicoes %>%
+props <- arquivo_proposicoes %>%
   read_csv(col_types = cols(
     tipo = col_character(),
     numero = col_integer(),
     ano = col_integer()
-    )) %>%
-  rowwise() %>%
-  do(
-    tibble(id = fetch_id_proposicao(.$tipo, .$numero, .$ano))
-  )
+    ))
+
+tryCatch({
+  props <- props %>%
+    pmap(fetch_id_proposicao) %>%
+    map_df(fetch_proposicao)
+}, error=function(e){
+  print("Alguma proposição não foi encontrada.")
+})
 
 # ids_proposicoes <- props_tipo_numero_ano_new %>%
 #   rowwise() %>%
@@ -30,9 +36,16 @@ arquivo_proposicoes %>%
 #     fetch_id_proposicao(.$tipo, .$numero, .$ano)
 #   )
 
-props <- arquivo_proposicoes %>%
-  pmap(fetch_id_proposicao) %>%
-  map_df(fetch_proposicao)
+# tryCatch({
+#   a %>%
+#     rowwise() %>%
+#     do(
+#       fetch_id_proposicao(.$tipo, .$numero, .$ano)
+#     )
+# }, error=function(e){
+#   print("Alguma proposição deu ruim")
+# })
+
 
 ids <- props$id %>%
   as.vector()
@@ -45,6 +58,6 @@ ids_ult_vot <- ultimas_votacoes$id %>%
 
 votacoes_relevantes <- fetch_votacao(ids_ult_vot)
 
-# constroi_dataframe(proposicoes, votacoes_relevantes) %>%
-#   format_csv() %>%
-#   writeLines(stdout())
+constroi_dataframe(props, votacoes_relevantes) %>%
+  format_csv() %>%
+  writeLines(stdout())
