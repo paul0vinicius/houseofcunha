@@ -4,8 +4,9 @@ Todos os erros detectados foram na API que depois deverão ser reportados como i
 
 Proposição não encontrada:
  - Todas as proposições que são do tipo "REQ" apresentaram esse erro. Como se não estivesse cadastrado na base de dados, retornando apenas vazio.
- - REC,49,2015
- - PLN,5,2015
+ - REC,49,2015 (id=1570705)
+ - PLN,5,2015 (id=1594497)
+ - Solução temporária: Recuperar os IDS das proposições não encontradas utilizando a API antiga e recuperar as proposições utilizando a API nova. Fazendo um acesso direto à proposição utilizando o ID, a proposição é encontrada.
 
 Erro 500:
  -  Algumas proposições apresentaram esse erro ao tentar pegar as votações relacionadas à ela utilizando a função `fetch_votacoes`. Os ids das proposições que retornam o erro:
@@ -19,7 +20,7 @@ Erro 500:
  - 994612 (PLP,25,2015)
 
 Erro 404:
- - As seguintes proposições retornaram esse erro ao pegar a última votação associada à elas. Apesar destas existirem, ao tentar acessar usando `fetch_votacao`, o erro é gerado.
+ - As seguintes proposições retornaram esse erro ao pegar a última votação associada à elas. Apesar destas existirem, ao tentar acessar usando `fetch_votacao`, o erro é gerado. É possível recuperar os votos de cada votação, mas não a votação em si contendo o posicionamento das bancadas, data/hora e afins.
 	PL,4474,2004
 	PEC,172,2012
 	PEC,197,2012
