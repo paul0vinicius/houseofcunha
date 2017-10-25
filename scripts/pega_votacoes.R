@@ -23,7 +23,7 @@ props <- arquivo_proposicoes %>%
     ))
 
 tryCatch({
-  props <- props %>%
+  props <- arquivo_proposicoes %>%
     pmap(fetch_id_proposicao) %>%
     map_df(fetch_proposicao)
 }, error=function(e){
@@ -46,18 +46,16 @@ tryCatch({
 #   print("Alguma proposição deu ruim")
 # })
 
+#props <- fetch_proposicao(resumo2$id)
 
 ids <- props$id %>%
   as.vector()
 
-ultimas_votacoes <- fetch_votacoes(ids) %>%
-  ultima_votacao()
+ultimas_votacoes <- fetch_votacoes(ids)
 
 ids_ult_vot <- ultimas_votacoes$id %>%
   as.vector()
 
-votacoes_relevantes <- fetch_votacao(ids_ult_vot)
+votacoes_relevantes <- fetch_votacao(ids_relevantes)
 
-constroi_dataframe(props, votacoes_relevantes) %>%
-  format_csv() %>%
-  writeLines(stdout())
+df_final <- constroi_dataframe(props, votacoes_relevantes)
