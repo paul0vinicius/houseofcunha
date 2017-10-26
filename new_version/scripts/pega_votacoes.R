@@ -23,7 +23,8 @@ props <- arquivo_proposicoes %>%
     ano = col_integer()
     ))
 
-ids_votacoes <- read_csv(arquivo_votacoes)$id_votacao
+votacoes <- read_csv(arquivo_votacoes)
+ids_votacoes <- votacoes$id_votacao
 
 tryCatch({
   props <- props %>%
@@ -42,5 +43,6 @@ tryCatch({
 })
 
 constroi_dataframe(props, votacoes_relevantes) %>%
+  left_join(votacoes, by="id_votacao") %>%
   format_csv() %>%
   writeLines(stdout())
