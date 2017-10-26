@@ -1,13 +1,20 @@
-id_votacao
-6675
-6259
-7431
-6531
-6204
-6429
-6437
-6286
-6575
-6310
-7492
-6502
+id_votacao,nome_votacao
+6675,"Cobrança de cursos em universidades públicas"
+6259,"Transgênico"
+7431,"Terceirização total 2017"
+6531,"Infanticídio indígena"
+6204,"Terceirização"
+6429,"Maioridade 1"
+6437,"Maioridade 2"
+6286,"Seguro Desemprego"
+6575,"Tributação serviços de internet"
+6310,"Pensão"
+7492,"Lei Trabalhista"
+6502,"Terrorismo"
+6358,"Distritão"
+6370,"Financiamento privado para partidos e candidatos"
+6359,"Voto facultativo"
+6354,"Financiamento privado para partidos"
+6371,"Reeleição"
+6352,"Tempo mandato"
+6369,"Coincidência Reeleição"
